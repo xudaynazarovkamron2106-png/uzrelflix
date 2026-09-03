@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UzrelFlix Pro - Mustaqillik 35 Yillik Maxsus Nashr</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --bg: #060609;
+            --surface: rgba(18, 18, 28, 0.75);
+            --surface-card: rgba(25, 25, 40, 0.5);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(139, 92, 246, 0.5);
+            --text: #f3f3f8;
+            --muted: #9492a5;
+            --primary: #6366f1;
+            --gold: #f59e0b;
+            --gradient: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            --gold-gradient: linear-gradient(135deg, #f59e0b, #d97706, #fbbf24);
+            --glow: 0 0 25px rgba(168, 85, 247, 0.4);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #2a2a3d; border-radius: 10px; }
+
+        /* Yuguruvchi Satr (Ticker Bar) */
+        .ticker-bar {
+            background: linear-gradient(90deg, #1e1b4b, #311042);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+            font-size: 12px;
+            padding: 6px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 30s linear infinite;
+            font-weight: 600;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 14px 28px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(6, 6, 9, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--glow);
+        }
+
+        .badge-35 {
+            background: var(--gold-gradient);
+            color: #000;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 4px 6px 4px 18px;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text);
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .search-btn {
+            background: var(--gradient);
+            border: none;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .btn-action:hover {
+            border-color: var(--border-glow);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary { background: var(--gradient); border: none; }
+        .btn-gold { background: var(--gold-gradient); color: #000; border: none; font-weight: 700; }
+
+        .main-layout { display: flex; }
+
+        nav {
+            width: 90px;
+            padding: 24px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-right: 1px solid var(--border);
+            flex-shrink: 0;
+            min-height: calc(100vh - 90px);
+            background: rgba(6, 6, 9, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 12px 8px;
+            border-radius: 16px;
+            color: var(--muted);
+            width: 100%;
+            font-size: 11px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-item.active, .nav-item:hover {
+            background: var(--surface-card);
+            color: #fff;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        main {
+            flex: 1;
+            padding: 28px;
+            min-width: 0;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(236,72,153,0.15));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 28px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Loading Spinner */
+        .loading-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            gap: 16px;
+        }
+
+        .spinner {
+            width: 42px;
+            height: 42px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 20px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .channel-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: var(--glow);
+        }
+
+        .channel-card-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .video-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.35s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-glow);
+            box-shadow: var(--glow);
+        }
+
+        .thumb-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        .thumb-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-info {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .channel-avatar-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .player-frame {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--glow);
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 10, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            width: 440px;
+            padding: 28px;
+            position: relative;
+            box-shadow: var(--glow);
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(6, 6, 9, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin: 8px 0 16px;
+        }
+
+        .form-group input, .form-group textarea {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text);
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticker-bar">
+        <div class="ticker-text" id="tickerText">
+            🇺🇿 O'zbekiston Mustaqilligining 35 Yilligi Muborak Bo'lsin! | UzrelFlix Maxsus Bayram Nashri | Barcha yurtdoshlarimizga tinchlik va IT sohasida ultra zafarlar tilaymiz!
+        </div>
+    </div>
+
+    <header>
+        <div class="logo" onclick="fetchContent('IT Texnologiyalar')">
+            <div class="logo-icon"><i data-lucide="play" style="fill:#fff; width:18px; color:#fff;"></i></div>
+            <span style="font-weight: 800; font-size: 20px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">UzrelFlix</span>
+            <span class="badge-35">35 Years</span>
+        </div>
+
+        <div class="search-container">
+            <i data-lucide="search" style="width: 18px; color: var(--muted);"></i>
+            <input type="text" id="searchInput" placeholder="Video va kanallarni qidirish..." onkeypress="handleKeyPress(event)">
+            <button class="search-btn" onclick="searchContent()">Qidirish</button>
+        </div>
+
+        <div class="header-actions">
+            <button class="btn-action btn-gold" onclick="openWishModal()">
+                <i data-lucide="heart" style="width: 16px;"></i> Tilak Bildirish
+            </button>
+            <button class="btn-action btn-primary" onclick="handleUploadClick()">
+                <i data-lucide="plus-circle" style="width: 16px;"></i> Qo'shish
+            </button>
+            <button class="btn-action" onclick="openLoginModal()">
+                <i data-lucide="user" style="width: 16px;"></i> <span id="userStatusText">Kirish</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <nav>
+            <button class="nav-item active" onclick="fetchContent('IT Texnologiyalar')"><i data-lucide="home"></i><span>Asosiy</span></button>
+            <button class="nav-item" onclick="fetchContent('Oʻzbekiston hujjatli film')"><i data-lucide="flag"></i><span>35 Yillik</span></button>
+            <button class="nav-item" onclick="fetchContent('Dasturlash')"><i data-lucide="code"></i><span>Dasturlash</span></button>
+            <button class="nav-item" onclick="fetchContent('Oʻzbekiston IT Park')"><i data-lucide="rocket"></i><span>Startap</span></button>
+        </nav>
+
+        <main id="mainContainer">
+            <div class="hero-banner">
+                <span style="background: var(--gold-gradient); color: #000; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase;">Maxsus Bayram Nashri</span>
+                <h1 style="font-size: 24px; font-weight: 800; margin: 10px 0 6px; background: linear-gradient(135deg, #fff, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">O'zbekiston Mustaqilligining 35 Yilligi Muborak! 🇺🇿</h1>
+                <p style="color: var(--muted); font-size: 13px; max-width: 600px; margin: 0 auto 16px;">Vatanimiz tarixi, zamonaviy IT yutuqlari va sara milliy loyihalarni birgalikda kuzatib boring.</p>
+                <button class="btn-action btn-gold" style="margin: 0 auto;" onclick="fetchContent('Oʻzbekiston 35 yillik kelajak')">Bayram Videolarini Ko'rish</button>
+            </div>
+
+            <div id="searchResultsContainer"></div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <i data-lucide="x" style="position: absolute; top: 20px; right: 20px; cursor: pointer;" onclick="closeModal('loginModal')"></i>
+            <h2 style="font-size: 20px; margin-bottom: 6px;">Tizimga Kirish</h2>
+            <p style="color: var(--muted); font-size: 13px; margin-bottom: 18px;">Haqiqiy hisobingiz orqali platformadan foydalaning.</p>
+
+            <div class="error-msg" id="loginError">Pochta yoki parol yaroqsiz!</div>
+
+            <label style="font-size: 12px; color: var(--muted);">Email Pochta</label>
+            <div class="form-group">
+                <i data-lucide="mail" style="width: 16px; color: var(--muted);"></i>
+                <input type="email" id="loginEmail" placeholder="masalan@domain.com">
+            </div>
+
+            <label style="font-size: 12px; color: var(--muted);">Parol</label>
+            <div class="form-group">
+                <i data-lucide="lock" style="width: 16px; color: var(--muted);"></i>
+                <input type="password" id="loginPass" placeholder="••••••••">
+            </div>
+
+            <button class="btn-action btn-primary" style="width: 100%; justify-content: center; padding: 12px;" onclick="authenticateUser()">Kirish</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="wishModal">
+        <div class="modal">
+            <i data-lucide="x" style="position: absolute; top: 20px; right: 20px; cursor: pointer;" onclick="closeModal('wishModal')"></i>
+            <h2 style="font-size: 20px; margin-bottom: 6px;">🇺🇿 Vatinga Bayram Tilagi</h2>
+            <p style="color: var(--muted); font-size: 13px; margin-bottom: 18px;">Sizning tilagingiz saytning yuqori yuguruvchi satrida paydo bo'ladi!</p>
+
+            <div class="form-group">
+                <textarea id="userWishText" rows="3" placeholder="O'zbekistonimizga eng ezgu tilaklaringizni yozing..."></textarea>
+            </div>
+
+            <button class="btn-action btn-gold" style="width: 100%; justify-content: center; padding: 12px;" onclick="addWish()">Tilakni Yuborish</button>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = "AIzaSyADP_VDsa0XglRPTXLVQHktplNLePRbyG0";
+        let isLoggedIn = false;
+        let currentUserEmail = "";
+
+        function refreshIcons() { lucide.createIcons(); }
+
+        // Fetch Channel Profile Avatars
+        async function getChannelDetails(channelIds) {
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelIds.join(',')}&key=${API_KEY}`);
+                const data = await response.json();
+                const channelMap = {};
+                if (data.items) {
+                    data.items.forEach(c => {
+                        channelMap[c.id] = c.snippet.thumbnails.default.url;
+                    });
+                }
+                return channelMap;
+            } catch (e) {
+                return {};
+            }
+        }
+
+        async function fetchContent(query) {
+            const targetContainer = document.getElementById('searchResultsContainer');
+            
+            // Loading State
+            targetContainer.innerHTML = `
+                <div class="loading-box">
+                    <div class="spinner"></div>
+                    <p style="color: var(--muted); font-size: 14px;">Ma'lumotlar qidirilmoqda, iltimos ozgina kuting...</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=16&q=${encodeURIComponent(query)}&type=video,channel&key=${API_KEY}`);
+                const data = await response.json();
+
+                if (data.items && data.items.length > 0) {
+                    const channels = data.items.filter(i => i.id.kind === "youtube#channel");
+                    const videos = data.items.filter(i => i.id.kind === "youtube#video");
+
+                    const channelIds = [...new Set(videos.map(v => v.snippet.channelId))];
+                    const channelAvatars = await getChannelDetails(channelIds);
+
+                    let html = '';
+
+                    // Topilgan Kanallar
+                    if (channels.length > 0) {
+                        html += `<div class="section-title"><i data-lucide="users" style="color:var(--gold);"></i> Topilgan Kanallar</div><div class="channels-grid">`;
+                        html += channels.map(c => `
+                            <div class="channel-card" onclick="fetchContent('${escapeHtml(c.snippet.channelTitle)}')">
+                                <img class="channel-card-img" src="${c.snippet.thumbnails.high.url}">
+                                <p style="font-weight:700; font-size:13px;">${c.snippet.channelTitle}</p>
+                            </div>
+                        `).join('');
+                        html += `</div>`;
+                    }
+
+                    // Videolar
+                    if (videos.length > 0) {
+                        html += `<div class="section-title"><i data-lucide="tv" style="color:var(--primary);"></i> Videolar</div><div class="video-grid">`;
+                        html += videos.map(v => {
+                            const avatarUrl = channelAvatars[v.snippet.channelId] || v.snippet.thumbnails.default.url;
+                            return `
+                                <div class="video-card" onclick="openPlayer('${v.id.videoId}', '${escapeHtml(v.snippet.title)}', '${escapeHtml(v.snippet.channelTitle)}')">
+                                    <div class="thumb-container">
+                                        <img src="${v.snippet.thumbnails.high.url}">
+                                    </div>
+                                    <div class="video-info">
+                                        <img class="channel-avatar-img" src="${avatarUrl}" alt="Kanal">
+                                        <div>
+                                            <p style="font-size: 13.5px; font-weight: 600; line-height: 1.35; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${v.snippet.title}</p>
+                                            <p style="color: var(--muted); font-size: 12px;">${v.snippet.channelTitle}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                        html += `</div>`;
+                    }
+
+                    targetContainer.innerHTML = html;
+                } else {
+                    targetContainer.innerHTML = `<div style="text-align:center; padding:50px; color:var(--muted);">Hech narsa topilmadi. Qayta urinib ko'ring.</div>`;
+                }
+            } catch (e) {
+                targetContainer.innerHTML = `<div style="text-align:center; padding:50px; color:var(--muted);">Yuklashda xatolik yuz berdi.</div>`;
+            }
+            refreshIcons();
+        }
+
+        function openPlayer(id, title, channel) {
+            document.getElementById('searchResultsContainer').innerHTML = `
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    <button class="btn-action" style="width:fit-content;" onclick="fetchContent('IT Texnologiyalar')"><i data-lucide="arrow-left"></i> Orqaga</button>
+                    <div class="player-frame">
+                        <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" style="width:100%; height:100%; border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h1 style="font-size: 20px;">${title}</h1>
+                    <p style="color: var(--muted);">${channel}</p>
+                </div>
+            `;
+            refreshIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Tizimga kirish
+        function authenticateUser() {
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+            const errorBox = document.getElementById('loginError');
+
+            if (email.includes('@') && pass.length >= 6) {
+                isLoggedIn = true;
+                currentUserEmail = email;
+                document.getElementById('userStatusText').innerText = email.split('@')[0];
+                errorBox.style.display = 'none';
+                closeModal('loginModal');
+                alert("Tizimga xavfsiz kirildi!");
+            } else {
+                errorBox.innerText = "To'g'ri email va kamida 6 belgili parol kiriting!";
+                errorBox.style.display = 'block';
+            }
+        }
+
+        // Tilak Qo'shish
+        function addWish() {
+            const text = document.getElementById('userWishText').value;
+            if (text.trim() !== '') {
+                const ticker = document.getElementById('tickerText');
+                ticker.innerText = `🇺🇿 ${text} | ` + ticker.innerText;
+                closeModal('wishModal');
+                alert("Rahmat! Tilagingiz tasdiqlandi va efirga uzatildi.");
+            }
+        }
+
+        function handleUploadClick() {
+            if (!isLoggedIn) {
+                alert("Video qo'shish uchun avval tizimga kiring!");
+                openLoginModal();
+            } else {
+                alert("Kontent joylash paneli ochildi.");
+            }
+        }
+
+        function searchContent() {
+            const q = document.getElementById('searchInput').value;
+            if (q.trim() !== '') fetchContent(q);
+        }
+
+        function handleKeyPress(e) { if (e.key === 'Enter') searchContent(); }
+        function openLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
+        function openWishModal() { document.getElementById('wishModal').style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function escapeHtml(text) { return text.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+        // Boshlang'ich Yuklash
+        fetchContent("IT Texnologiyalar O'zbekiston");
+    </script>
+</body>
+</html>
