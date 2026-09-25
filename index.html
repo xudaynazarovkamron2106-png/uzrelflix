@@ -1,666 +1,3002 @@
+```html
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UzrelFlix Pro - Mustaqillik 35 Yillik Maxsus Nashr</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        :root {
-            --bg: #060609;
-            --surface: rgba(18, 18, 28, 0.75);
-            --surface-card: rgba(25, 25, 40, 0.5);
-            --border: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(139, 92, 246, 0.5);
-            --text: #f3f3f8;
-            --muted: #9492a5;
-            --primary: #6366f1;
-            --gold: #f59e0b;
-            --gradient: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-            --gold-gradient: linear-gradient(135deg, #f59e0b, #d97706, #fbbf24);
-            --glow: 0 0 25px rgba(168, 85, 247, 0.4);
-        }
+<title>UzrelFlix — 3D Video Platform</title>
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
-            background-attachment: fixed;
-        }
+<script src="https://unpkg.com/lucide@latest"></script>
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: #2a2a3d; border-radius: 10px; }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
 
-        /* Yuguruvchi Satr (Ticker Bar) */
-        .ticker-bar {
-            background: linear-gradient(90deg, #1e1b4b, #311042);
-            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
-            color: #fbbf24;
-            font-size: 12px;
-            padding: 6px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-        }
+:root{
+    --bg:#050507;
+    --panel:rgba(17,17,24,.72);
+    --card:rgba(22,22,32,.68);
+    --border:rgba(255,255,255,.09);
+    --text:#f7f7fb;
+    --muted:#9696a8;
+    --primary:#6d5dfc;
+    --cyan:#20d9ff;
+    --pink:#e84cff;
 
-        .ticker-text {
-            display: inline-block;
-            padding-left: 100%;
-            animation: ticker 30s linear infinite;
-            font-weight: 600;
-        }
+    --gradient:
+        linear-gradient(
+            135deg,
+            #6d5dfc,
+            #b14cff,
+            #ed3fba
+        );
 
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
+    --glow:
+        0 0 35px rgba(109,93,252,.28);
+}
 
-        header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 14px 28px;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            background: rgba(6, 6, 9, 0.85);
-            backdrop-filter: blur(16px);
-            z-index: 100;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
+body{
+    background:#050507;
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
 
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--glow);
-        }
+    background-image:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(109,93,252,.18),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(32,217,255,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 70% 15%,
+            rgba(232,76,255,.08),
+            transparent 25%
+        );
 
-        .badge-35 {
-            background: var(--gold-gradient);
-            color: #000;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 2px 6px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-        }
+    background-attachment:fixed;
+}
 
-        .search-container {
-            flex: 1;
-            max-width: 500px;
-            display: flex;
-            align-items: center;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 4px 6px 4px 18px;
-            gap: 10px;
-            backdrop-filter: blur(10px);
-        }
+/* GRID BACKGROUND */
 
-        .search-container input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--text);
-            font-size: 14px;
-            width: 100%;
-        }
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
 
-        .search-btn {
-            background: var(--gradient);
-            border: none;
-            color: #fff;
-            padding: 8px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-        }
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
 
-        .header-actions {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    background-size:50px 50px;
 
-        .btn-action {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 18px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s;
-        }
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 85%
+        );
+}
 
-        .btn-action:hover {
-            border-color: var(--border-glow);
-            box-shadow: var(--glow);
-            transform: translateY(-2px);
-        }
+/* SCROLLBAR */
 
-        .btn-primary { background: var(--gradient); border: none; }
-        .btn-gold { background: var(--gold-gradient); color: #000; border: none; font-weight: 700; }
+::-webkit-scrollbar{
+    width:7px;
+}
 
-        .main-layout { display: flex; }
+::-webkit-scrollbar-track{
+    background:#050507;
+}
 
-        nav {
-            width: 90px;
-            padding: 24px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            border-right: 1px solid var(--border);
-            flex-shrink: 0;
-            min-height: calc(100vh - 90px);
-            background: rgba(6, 6, 9, 0.4);
-            backdrop-filter: blur(10px);
-        }
+::-webkit-scrollbar-thumb{
+    background:#292936;
+    border-radius:20px;
+}
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 12px 8px;
-            border-radius: 16px;
-            color: var(--muted);
-            width: 100%;
-            font-size: 11px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
+/* HEADER */
 
-        .nav-item.active, .nav-item:hover {
-            background: var(--surface-card);
-            color: #fff;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
+header{
+    height:76px;
 
-        main {
-            flex: 1;
-            padding: 28px;
-            min-width: 0;
-        }
+    display:flex;
+    align-items:center;
 
-        /* Hero Banner */
-        .hero-banner {
-            background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(236,72,153,0.15));
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 24px;
-            padding: 28px;
-            margin-bottom: 28px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+    gap:20px;
+    padding:12px 26px;
 
-        /* Loading Spinner */
-        .loading-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
-            gap: 16px;
-        }
+    position:sticky;
+    top:0;
 
-        .spinner {
-            width: 42px;
-            height: 42px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid var(--gold);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
+    z-index:100;
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    background:rgba(5,5,7,.78);
+    backdrop-filter:blur(22px);
 
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 20px 0 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    border-bottom:
+        1px solid var(--border);
+}
 
-        .channels-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 28px;
-        }
+/* LOGO */
 
-        .channel-card {
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
 
-        .channel-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-glow);
-            box-shadow: var(--glow);
-        }
+    cursor:pointer;
 
-        .channel-card-img {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--gold);
-        }
+    min-width:max-content;
+}
 
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-        }
+.logo-icon{
+    width:42px;
+    height:42px;
 
-        .video-card {
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.35s;
-        }
+    border-radius:14px;
 
-        .video-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--border-glow);
-            box-shadow: var(--glow);
-        }
+    background:var(--gradient);
 
-        .thumb-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-        }
+    display:grid;
+    place-items:center;
 
-        .thumb-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    box-shadow:
+        0 0 30px rgba(109,93,252,.5);
 
-        .video-info {
-            padding: 16px;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
+    transition:.3s;
 
-        .channel-avatar-img {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-            border: 1px solid var(--border);
-        }
+    transform:translateZ(20px);
+}
 
-        .player-frame {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: var(--glow);
-        }
+.logo:hover .logo-icon{
+    transform:
+        rotate(-8deg)
+        scale(1.07);
+}
 
-        /* Modals */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(5, 5, 10, 0.85);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-            backdrop-filter: blur(10px);
-        }
+.logo-name{
+    font-size:20px;
+    font-weight:900;
 
-        .modal {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            width: 440px;
-            padding: 28px;
-            position: relative;
-            box-shadow: var(--glow);
-        }
+    background:var(--gradient);
 
-        .form-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(6, 6, 9, 0.6);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin: 8px 0 16px;
-        }
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-        .form-group input, .form-group textarea {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--text);
-            font-size: 14px;
-            width: 100%;
-        }
+/* SEARCH */
 
-        .error-msg {
-            color: #ef4444;
-            font-size: 12px;
-            margin-bottom: 10px;
-            display: none;
-        }
-    </style>
+.search-container{
+    flex:1;
+    max-width:620px;
+
+    height:44px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+        4px
+        5px
+        4px
+        17px;
+
+    background:
+        rgba(20,20,28,.72);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:16px;
+
+    backdrop-filter:blur(16px);
+
+    transition:.3s;
+}
+
+.search-container:focus-within{
+    border-color:
+        rgba(109,93,252,.65);
+
+    box-shadow:
+        0 0 25px
+        rgba(109,93,252,.14);
+}
+
+.search-container input{
+    width:100%;
+
+    background:none;
+
+    border:0;
+    outline:0;
+
+    color:#fff;
+
+    font-size:14px;
+}
+
+.search-btn{
+    height:34px;
+
+    padding:0 18px;
+
+    border:0;
+
+    border-radius:11px;
+
+    background:var(--gradient);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.search-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* HEADER BUTTONS */
+
+.header-actions{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    padding:10px 14px;
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid var(--border);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+
+    box-shadow:var(--glow);
+}
+
+.btn.primary{
+    background:var(--gradient);
+    border:0;
+}
+
+/* LAYOUT */
+
+.main-layout{
+    display:flex;
+
+    min-height:
+        calc(100vh - 76px);
+}
+
+/* SIDEBAR */
+
+nav{
+    width:92px;
+
+    padding:22px 9px;
+
+    border-right:
+        1px solid var(--border);
+
+    background:
+        rgba(5,5,7,.35);
+
+    backdrop-filter:blur(15px);
+
+    flex-shrink:0;
+}
+
+.nav-item{
+    width:100%;
+
+    padding:13px 5px;
+
+    margin-bottom:9px;
+
+    border:
+        1px solid transparent;
+
+    border-radius:15px;
+
+    background:none;
+
+    color:var(--muted);
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:6px;
+
+    font-size:10px;
+
+    transition:.3s;
+}
+
+.nav-item svg{
+    width:20px;
+}
+
+.nav-item:hover,
+.nav-item.active{
+    color:#fff;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border-color:
+        var(--border);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.25);
+}
+
+/* MAIN */
+
+main{
+    flex:1;
+
+    padding:28px;
+
+    min-width:0;
+
+    perspective:1200px;
+}
+
+/* HERO */
+
+.hero{
+    position:relative;
+
+    overflow:hidden;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:28px;
+
+    padding:40px;
+
+    margin-bottom:30px;
+
+    min-height:230px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(109,93,252,.16),
+            rgba(232,76,255,.06),
+            rgba(32,217,255,.06)
+        );
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.35),
+        inset 0 1px
+        rgba(255,255,255,.05);
+}
+
+.hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    right:-70px;
+    top:-100px;
+
+    border-radius:50%;
+
+    background:
+        rgba(109,93,252,.16);
+
+    box-shadow:
+        0 0 90px
+        rgba(109,93,252,.28);
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    left:-60px;
+    bottom:-80px;
+
+    border-radius:50%;
+
+    background:
+        rgba(32,217,255,.10);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    max-width:720px;
+}
+
+.pill{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:6px 11px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.05);
+
+    border-radius:99px;
+
+    color:#c8c6ff;
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+.hero h1{
+    font-size:
+        clamp(28px,4vw,45px);
+
+    line-height:1.05;
+
+    margin:
+        15px 0 10px;
+
+    letter-spacing:-1.5px;
+}
+
+.gradient-text{
+    background:var(--gradient);
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+
+    max-width:650px;
+
+    font-size:14px;
+
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:22px;
+
+    flex-wrap:wrap;
+}
+
+/* SECTION */
+
+.section-title{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    font-size:19px;
+
+    font-weight:850;
+
+    margin:
+        26px 0 16px;
+}
+
+.section-title small{
+    color:var(--muted);
+
+    font-size:11px;
+
+    font-weight:500;
+}
+
+/* CHANNELS */
+
+.channels-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(175px,1fr)
+        );
+
+    gap:15px;
+
+    margin-bottom:30px;
+}
+
+.channel-card{
+    background:var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    transform-style:preserve-3d;
+}
+
+.channel-card:hover{
+    transform:
+        translateY(-7px)
+        rotateX(3deg)
+        rotateY(-3deg);
+
+    border-color:
+        rgba(109,93,252,.5);
+
+    box-shadow:var(--glow);
+}
+
+.channel-card-img{
+    width:68px;
+    height:68px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+        2px solid
+        rgba(109,93,252,.6);
+
+    box-shadow:
+        0 0 22px
+        rgba(109,93,252,.18);
+}
+
+/* VIDEO GRID */
+
+.video-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(285px,1fr)
+        );
+
+    gap:22px;
+}
+
+/* VIDEO CARD */
+
+.video-card{
+    background:var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:21px;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+    transform-style:preserve-3d;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.18);
+}
+
+.video-card:hover{
+    transform:
+        translateY(-8px)
+        rotateX(2deg);
+
+    border-color:
+        rgba(109,93,252,.42);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,.35),
+        var(--glow);
+}
+
+/* THUMBNAIL */
+
+.thumb-container{
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    background:#000;
+
+    overflow:hidden;
+
+    cursor:pointer;
+}
+
+.thumb-container img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.video-card:hover
+.thumb-container img{
+    transform:scale(1.055);
+}
+
+.play-overlay{
+    position:absolute;
+
+    inset:0;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.4)
+        );
+
+    opacity:0;
+
+    transition:.25s;
+}
+
+.video-card:hover
+.play-overlay{
+    opacity:1;
+}
+
+.play-circle{
+    width:54px;
+    height:54px;
+
+    border-radius:50%;
+
+    display:grid;
+    place-items:center;
+
+    background:
+        rgba(109,93,252,.9);
+
+    box-shadow:
+        0 0 35px
+        rgba(109,93,252,.55);
+}
+
+/* VIDEO INFO */
+
+.video-info{
+    padding:
+        14px
+        15px
+        9px;
+
+    display:flex;
+
+    gap:11px;
+}
+
+.channel-avatar-img{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    flex-shrink:0;
+}
+
+.video-title{
+    font-size:13.5px;
+
+    font-weight:700;
+
+    line-height:1.4;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:2;
+
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+}
+
+.channel-name{
+    font-size:11.5px;
+
+    color:var(--muted);
+
+    margin-top:4px;
+}
+
+/* VIDEO ACTIONS */
+
+.video-actions{
+    display:flex;
+
+    gap:7px;
+
+    padding:
+        6px
+        12px
+        13px;
+}
+
+.video-action{
+    flex:1;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.035);
+
+    color:#b9b9c8;
+
+    padding:8px 5px;
+
+    border-radius:11px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:5px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.22s;
+}
+
+.video-action:hover{
+    color:#fff;
+
+    border-color:
+        rgba(109,93,252,.55);
+
+    background:
+        rgba(109,93,252,.11);
+
+    transform:translateY(-2px);
+}
+
+.video-action.liked{
+    color:#8c9aff;
+
+    border-color:#6d5dfc;
+
+    background:
+        rgba(109,93,252,.13);
+}
+
+.video-action.subscribed{
+    color:#62e7ff;
+
+    border-color:#20d9ff;
+
+    background:
+        rgba(32,217,255,.08);
+}
+
+/* LOADING */
+
+.loading-box{
+    text-align:center;
+
+    padding:70px 20px;
+
+    color:var(--muted);
+}
+
+.spinner{
+    width:44px;
+    height:44px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.08);
+
+    border-top-color:
+        var(--primary);
+
+    border-radius:50%;
+
+    animation:
+        spin .8s linear infinite;
+
+    margin:
+        0 auto 15px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* PLAYER */
+
+.player-frame{
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    border-radius:23px;
+
+    overflow:hidden;
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.45),
+        var(--glow);
+}
+
+.player-frame iframe{
+    width:100%;
+    height:100%;
+
+    border:0;
+}
+
+.player-actions{
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+    margin:12px 0;
+}
+
+.player-meta{
+    padding:17px 0;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.player-meta h1{
+    font-size:21px;
+
+    line-height:1.35;
+}
+
+.player-meta p{
+    color:var(--muted);
+
+    margin-top:7px;
+
+    font-size:13px;
+}
+
+/* MODAL */
+
+.modal-overlay{
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.75);
+
+    backdrop-filter:
+        blur(14px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:500;
+
+    padding:20px;
+}
+
+.modal{
+    width:
+        min(470px,100%);
+
+    background:
+        rgba(18,18,27,.94);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:25px;
+
+    padding:27px;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.65),
+        var(--glow);
+
+    position:relative;
+}
+
+.form-group{
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
+    background:
+        rgba(0,0,0,.3);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:12px 14px;
+
+    margin:8px 0 16px;
+}
+
+.form-group input{
+    width:100%;
+
+    background:none;
+
+    border:0;
+
+    outline:0;
+
+    color:#fff;
+}
+
+.error-msg{
+    display:none;
+
+    color:#ff5c7a;
+
+    font-size:12px;
+
+    margin-bottom:10px;
+}
+
+/* ========================= */
+/* UZREO AI */
+/* ========================= */
+
+.ai-button{
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    width:66px;
+    height:66px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:22px;
+
+    background:var(--gradient);
+
+    display:grid;
+
+    place-items:center;
+
+    cursor:pointer;
+
+    z-index:400;
+
+    box-shadow:
+        0 0 35px
+        rgba(109,93,252,.5),
+        0 20px 45px
+        rgba(0,0,0,.45);
+
+    animation:
+        float 3s ease-in-out infinite;
+
+    transition:.3s;
+}
+
+.ai-button:hover{
+    transform:
+        scale(1.08)
+        rotate(3deg);
+}
+
+.ai-orb{
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff,
+            #79e9ff 22%,
+            #7b5cff 55%,
+            #27174f
+        );
+
+    box-shadow:
+        0 0 22px
+        #8a7bff;
+}
+
+@keyframes float{
+    50%{
+        transform:translateY(-7px);
+    }
+}
+
+/* AI PANEL */
+
+.ai-panel{
+    position:fixed;
+
+    right:25px;
+    bottom:104px;
+
+    width:
+        min(
+            390px,
+            calc(100vw - 30px)
+        );
+
+    height:540px;
+
+    background:
+        rgba(10,10,16,.93);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:25px;
+
+    backdrop-filter:
+        blur(25px);
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.65),
+        var(--glow);
+
+    z-index:399;
+
+    display:none;
+
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+.ai-head{
+    padding:16px 17px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+}
+
+.ai-mini{
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    background:var(--gradient);
+
+    display:grid;
+
+    place-items:center;
+}
+
+.ai-head-info{
+    flex:1;
+}
+
+.ai-head-info b{
+    font-size:14px;
+}
+
+.online{
+    font-size:10px;
+
+    color:#61e6aa;
+}
+
+.ai-messages{
+    flex:1;
+
+    padding:16px;
+
+    overflow:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.msg{
+    max-width:82%;
+
+    padding:
+        10px
+        12px;
+
+    border-radius:15px;
+
+    font-size:12.5px;
+
+    line-height:1.55;
+}
+
+.msg.ai{
+    align-self:flex-start;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid var(--border);
+}
+
+.msg.user{
+    align-self:flex-end;
+
+    background:var(--gradient);
+}
+
+.ai-input{
+    padding:12px;
+
+    border-top:
+        1px solid var(--border);
+
+    display:flex;
+
+    gap:7px;
+}
+
+.ai-input input{
+    flex:1;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid var(--border);
+
+    outline:0;
+
+    color:#fff;
+
+    border-radius:13px;
+
+    padding:11px;
+
+    font-size:12px;
+}
+
+.ai-send,
+.mic{
+    width:42px;
+
+    border:0;
+
+    border-radius:13px;
+
+    background:var(--gradient);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    display:grid;
+
+    place-items:center;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    header{
+        padding:11px 15px;
+    }
+
+    .header-actions .optional{
+        display:none;
+    }
+
+    .search-container{
+        max-width:none;
+    }
+
+    main{
+        padding:20px;
+    }
+
+    nav{
+        width:72px;
+    }
+
+    .nav-item{
+        font-size:9px;
+    }
+}
+
+@media(max-width:650px){
+
+    header{
+        gap:9px;
+    }
+
+    .logo-name{
+        display:none;
+    }
+
+    .search-container{
+        height:40px;
+    }
+
+    .search-btn{
+        font-size:0;
+
+        width:37px;
+
+        padding:0;
+
+        display:grid;
+
+        place-items:center;
+    }
+
+    .search-btn::after{
+        content:"⌕";
+
+        font-size:18px;
+    }
+
+    .header-actions .btn{
+        padding:9px;
+    }
+
+    .header-actions .btn span{
+        display:none;
+    }
+
+    nav{
+        display:none;
+    }
+
+    main{
+        padding:15px;
+    }
+
+    .hero{
+        padding:27px 20px;
+
+        border-radius:22px;
+    }
+
+    .hero h1{
+        font-size:29px;
+    }
+
+    .video-grid{
+        grid-template-columns:1fr;
+    }
+
+    .channels-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .ai-button{
+        right:15px;
+        bottom:15px;
+    }
+
+    .ai-panel{
+        right:15px;
+        bottom:92px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="ticker-bar">
-        <div class="ticker-text" id="tickerText">
-            🇺🇿 O'zbekiston Mustaqilligining 35 Yilligi Muborak Bo'lsin! | UzrelFlix Maxsus Bayram Nashri | Barcha yurtdoshlarimizga tinchlik va IT sohasida ultra zafarlar tilaymiz!
+<!-- HEADER -->
+
+<header>
+
+    <div
+        class="logo"
+        onclick="fetchContent('IT Texnologiyalar Oʻzbekiston')"
+    >
+
+        <div class="logo-icon">
+
+            <i
+                data-lucide="play"
+                style="fill:white;width:19px"
+            ></i>
+
         </div>
+
+        <span class="logo-name">
+            UzrelFlix
+        </span>
+
     </div>
 
-    <header>
-        <div class="logo" onclick="fetchContent('IT Texnologiyalar')">
-            <div class="logo-icon"><i data-lucide="play" style="fill:#fff; width:18px; color:#fff;"></i></div>
-            <span style="font-weight: 800; font-size: 20px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">UzrelFlix</span>
-            <span class="badge-35">35 Years</span>
-        </div>
 
-        <div class="search-container">
-            <i data-lucide="search" style="width: 18px; color: var(--muted);"></i>
-            <input type="text" id="searchInput" placeholder="Video va kanallarni qidirish..." onkeypress="handleKeyPress(event)">
-            <button class="search-btn" onclick="searchContent()">Qidirish</button>
-        </div>
+    <div class="search-container">
 
-        <div class="header-actions">
-            <button class="btn-action btn-gold" onclick="openWishModal()">
-                <i data-lucide="heart" style="width: 16px;"></i> Tilak Bildirish
-            </button>
-            <button class="btn-action btn-primary" onclick="handleUploadClick()">
-                <i data-lucide="plus-circle" style="width: 16px;"></i> Qo'shish
-            </button>
-            <button class="btn-action" onclick="openLoginModal()">
-                <i data-lucide="user" style="width: 16px;"></i> <span id="userStatusText">Kirish</span>
-            </button>
-        </div>
-    </header>
+        <i
+            data-lucide="search"
+            style="width:17px;color:var(--muted)"
+        ></i>
 
-    <div class="main-layout">
-        <nav>
-            <button class="nav-item active" onclick="fetchContent('IT Texnologiyalar')"><i data-lucide="home"></i><span>Asosiy</span></button>
-            <button class="nav-item" onclick="fetchContent('Oʻzbekiston hujjatli film')"><i data-lucide="flag"></i><span>35 Yillik</span></button>
-            <button class="nav-item" onclick="fetchContent('Dasturlash')"><i data-lucide="code"></i><span>Dasturlash</span></button>
-            <button class="nav-item" onclick="fetchContent('Oʻzbekiston IT Park')"><i data-lucide="rocket"></i><span>Startap</span></button>
-        </nav>
+        <input
+            id="searchInput"
+            placeholder="Video va kanallarni qidirish..."
+            onkeypress="handleKeyPress(event)"
+        >
 
-        <main id="mainContainer">
-            <div class="hero-banner">
-                <span style="background: var(--gold-gradient); color: #000; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase;">Maxsus Bayram Nashri</span>
-                <h1 style="font-size: 24px; font-weight: 800; margin: 10px 0 6px; background: linear-gradient(135deg, #fff, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">O'zbekiston Mustaqilligining 35 Yilligi Muborak! 🇺🇿</h1>
-                <p style="color: var(--muted); font-size: 13px; max-width: 600px; margin: 0 auto 16px;">Vatanimiz tarixi, zamonaviy IT yutuqlari va sara milliy loyihalarni birgalikda kuzatib boring.</p>
-                <button class="btn-action btn-gold" style="margin: 0 auto;" onclick="fetchContent('Oʻzbekiston 35 yillik kelajak')">Bayram Videolarini Ko'rish</button>
-            </div>
+        <button
+            class="search-btn"
+            onclick="searchContent()"
+        >
+            Qidirish
+        </button>
 
-            <div id="searchResultsContainer"></div>
-        </main>
     </div>
 
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal">
-            <i data-lucide="x" style="position: absolute; top: 20px; right: 20px; cursor: pointer;" onclick="closeModal('loginModal')"></i>
-            <h2 style="font-size: 20px; margin-bottom: 6px;">Tizimga Kirish</h2>
-            <p style="color: var(--muted); font-size: 13px; margin-bottom: 18px;">Haqiqiy hisobingiz orqali platformadan foydalaning.</p>
 
-            <div class="error-msg" id="loginError">Pochta yoki parol yaroqsiz!</div>
+    <div class="header-actions">
 
-            <label style="font-size: 12px; color: var(--muted);">Email Pochta</label>
-            <div class="form-group">
-                <i data-lucide="mail" style="width: 16px; color: var(--muted);"></i>
-                <input type="email" id="loginEmail" placeholder="masalan@domain.com">
+        <button
+            class="btn primary optional"
+            onclick="handleUploadClick()"
+        >
+
+            <i data-lucide="plus-circle"></i>
+
+            <span>
+                Qoʻshish
+            </span>
+
+        </button>
+
+
+        <button
+            class="btn"
+            onclick="openLoginModal()"
+        >
+
+            <span id="userStatusText">
+                Kirish
+            </span>
+
+            <div class="user-dot">
+
+                <i
+                    data-lucide="user"
+                    style="width:15px"
+                ></i>
+
             </div>
 
-            <label style="font-size: 12px; color: var(--muted);">Parol</label>
-            <div class="form-group">
-                <i data-lucide="lock" style="width: 16px; color: var(--muted);"></i>
-                <input type="password" id="loginPass" placeholder="••••••••">
-            </div>
+        </button>
 
-            <button class="btn-action btn-primary" style="width: 100%; justify-content: center; padding: 12px;" onclick="authenticateUser()">Kirish</button>
-        </div>
     </div>
 
-    <div class="modal-overlay" id="wishModal">
-        <div class="modal">
-            <i data-lucide="x" style="position: absolute; top: 20px; right: 20px; cursor: pointer;" onclick="closeModal('wishModal')"></i>
-            <h2 style="font-size: 20px; margin-bottom: 6px;">🇺🇿 Vatinga Bayram Tilagi</h2>
-            <p style="color: var(--muted); font-size: 13px; margin-bottom: 18px;">Sizning tilagingiz saytning yuqori yuguruvchi satrida paydo bo'ladi!</p>
+</header>
 
-            <div class="form-group">
-                <textarea id="userWishText" rows="3" placeholder="O'zbekistonimizga eng ezgu tilaklaringizni yozing..."></textarea>
+
+<!-- MAIN -->
+
+<div class="main-layout">
+
+    <!-- SIDEBAR -->
+
+    <nav>
+
+        <button
+            class="nav-item active"
+            onclick="fetchContent('IT Texnologiyalar Oʻzbekiston')"
+        >
+
+            <i data-lucide="home"></i>
+
+            <span>
+                Asosiy
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            onclick="fetchContent('Oʻzbekiston texnologiya')"
+        >
+
+            <i data-lucide="play-square"></i>
+
+            <span>
+                Videolar
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            onclick="fetchContent('Dasturlash')"
+        >
+
+            <i data-lucide="code-2"></i>
+
+            <span>
+                Dasturlash
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            onclick="fetchContent('AI sunʼiy intellekt')"
+        >
+
+            <i data-lucide="brain"></i>
+
+            <span>
+                AI
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            onclick="fetchContent('Startap IT Uzbekistan')"
+        >
+
+            <i data-lucide="rocket"></i>
+
+            <span>
+                Startap
+            </span>
+
+        </button>
+
+    </nav>
+
+
+    <!-- CONTENT -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="pill">
+
+                    <i
+                        data-lucide="sparkles"
+                        style="width:13px"
+                    ></i>
+
+                    NEXT-GEN VIDEO PLATFORM
+
+                </span>
+
+
+                <h1>
+
+                    Videolarni
+
+                    <span class="gradient-text">
+                        boshqacha
+                    </span>
+
+                    tomosha qil.
+
+                </h1>
+
+
+                <p>
+
+                    UzrelFlix — YouTube kontentini
+                    zamonaviy 3D interfeysda topish,
+                    ko‘rish va Uzreo AI bilan
+                    suhbatlashish uchun yaratilgan platforma.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="btn primary"
+                        onclick="fetchContent('AI texnologiyalar')"
+                    >
+
+                        <i data-lucide="play"></i>
+
+                        Boshlash
+
+                    </button>
+
+
+                    <button
+                        class="btn"
+                        onclick="toggleAI(true)"
+                    >
+
+                        <i data-lucide="bot"></i>
+
+                        Uzreo AI
+
+                    </button>
+
+                </div>
+
             </div>
 
-            <button class="btn-action btn-gold" style="width: 100%; justify-content: center; padding: 12px;" onclick="addWish()">Tilakni Yuborish</button>
+        </section>
+
+
+        <div id="searchResultsContainer"></div>
+
+    </main>
+
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div
+    class="modal-overlay"
+    id="loginModal"
+>
+
+    <div class="modal">
+
+        <i
+            data-lucide="x"
+            style="
+                position:absolute;
+                right:20px;
+                top:20px;
+                cursor:pointer
+            "
+            onclick="closeModal('loginModal')"
+        ></i>
+
+
+        <h2>
+            Tizimga kirish
+        </h2>
+
+
+        <p
+            style="
+                color:var(--muted);
+                font-size:13px;
+                margin:7px 0 20px
+            "
+        >
+
+            UzrelFlix hisobingiz bilan davom eting.
+
+        </p>
+
+
+        <div
+            class="error-msg"
+            id="loginError"
+        ></div>
+
+
+        <label
+            style="
+                font-size:12px;
+                color:var(--muted)
+            "
+        >
+            Email
+        </label>
+
+
+        <div class="form-group">
+
+            <i
+                data-lucide="mail"
+                style="width:16px"
+            ></i>
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="email@example.com"
+            >
+
         </div>
+
+
+        <label
+            style="
+                font-size:12px;
+                color:var(--muted)
+            "
+        >
+            Parol
+        </label>
+
+
+        <div class="form-group">
+
+            <i
+                data-lucide="lock"
+                style="width:16px"
+            ></i>
+
+            <input
+                id="loginPass"
+                type="password"
+                placeholder="Kamida 6 belgi"
+            >
+
+        </div>
+
+
+        <button
+            class="btn primary"
+            style="width:100%"
+            onclick="authenticateUser()"
+        >
+
+            Kirish
+
+        </button>
+
     </div>
 
-    <script>
-        const API_KEY = "AIzaSyADP_VDsa0XglRPTXLVQHktplNLePRbyG0";
-        let isLoggedIn = false;
-        let currentUserEmail = "";
+</div>
 
-        function refreshIcons() { lucide.createIcons(); }
 
-        // Fetch Channel Profile Avatars
-        async function getChannelDetails(channelIds) {
-            try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelIds.join(',')}&key=${API_KEY}`);
-                const data = await response.json();
-                const channelMap = {};
-                if (data.items) {
-                    data.items.forEach(c => {
-                        channelMap[c.id] = c.snippet.thumbnails.default.url;
-                    });
-                }
-                return channelMap;
-            } catch (e) {
-                return {};
-            }
-        }
+<!-- ===================== -->
+<!-- UZREO AI BUTTON -->
+<!-- ===================== -->
 
-        async function fetchContent(query) {
-            const targetContainer = document.getElementById('searchResultsContainer');
-            
-            // Loading State
-            targetContainer.innerHTML = `
+<button
+    class="ai-button"
+    onclick="toggleAI()"
+    aria-label="Uzreo AI"
+>
+
+    <div class="ai-orb"></div>
+
+</button>
+
+
+<!-- UZREO AI PANEL -->
+
+<div
+    class="ai-panel"
+    id="aiPanel"
+>
+
+    <div class="ai-head">
+
+        <div class="ai-mini">
+
+            <i
+                data-lucide="sparkles"
+                style="width:19px"
+            ></i>
+
+        </div>
+
+
+        <div class="ai-head-info">
+
+            <b>
+                Uzreo AI
+            </b>
+
+            <div class="online">
+                ● Online assistant
+            </div>
+
+        </div>
+
+
+        <i
+            data-lucide="x"
+            style="cursor:pointer"
+            onclick="toggleAI(false)"
+        ></i>
+
+    </div>
+
+
+    <div
+        class="ai-messages"
+        id="aiMessages"
+    >
+
+        <div class="msg ai">
+
+            Salom! Men
+            <b>Uzreo AI</b>.
+
+            Video qidirish,
+            gʻoya topish yoki
+            sayt haqida savollaringizga
+            yordam beraman.
+
+        </div>
+
+    </div>
+
+
+    <div class="ai-input">
+
+        <input
+            id="aiInput"
+            placeholder="Uzreo'ga yozing..."
+            onkeypress="
+                if(event.key==='Enter')
+                sendAI()
+            "
+        >
+
+
+        <button
+            class="mic"
+            onclick="voiceInput()"
+        >
+
+            <i data-lucide="mic"></i>
+
+        </button>
+
+
+        <button
+            class="ai-send"
+            onclick="sendAI()"
+        >
+
+            <i data-lucide="send"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   YOUTUBE API
+========================= */
+
+const API_KEY =
+"AIzaSyADP_VDsa0XglRPTXLVQHktplNLePRbyG0";
+
+
+let isLoggedIn = false;
+
+let currentUserEmail = "";
+
+
+/* ICONS */
+
+function refreshIcons(){
+
+    lucide.createIcons();
+
+}
+
+
+/* HTML SECURITY */
+
+function esc(text){
+
+    return String(text || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function jsEsc(text){
+
+    return String(text || "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/\n/g," ");
+
+}
+
+
+/* =========================
+   CHANNEL DATA
+========================= */
+
+async function getChannelDetails(ids){
+
+    if(!ids.length)
+        return {};
+
+    try{
+
+        const response =
+            await fetch(
+                `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${ids.join(",")}&key=${API_KEY}`
+            );
+
+        const data =
+            await response.json();
+
+        const map = {};
+
+        (data.items || []).forEach(channel => {
+
+            map[channel.id] =
+                channel.snippet.thumbnails?.default?.url
+                || "";
+
+        });
+
+        return map;
+
+    }catch(error){
+
+        return {};
+
+    }
+
+}
+
+
+/* =========================
+   SEARCH YOUTUBE
+========================= */
+
+async function fetchContent(query){
+
+    const box =
+        document.getElementById(
+            "searchResultsContainer"
+        );
+
+
+    box.innerHTML = `
+
+        <div class="loading-box">
+
+            <div class="spinner"></div>
+
+            <p>
+                Videolar qidirilmoqda...
+            </p>
+
+        </div>
+
+    `;
+
+
+    try{
+
+        const response =
+            await fetch(
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=18&q=${encodeURIComponent(query)}&type=video,channel&key=${API_KEY}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(data.error)
+            throw new Error(
+                data.error.message
+            );
+
+
+        if(!data.items?.length){
+
+            box.innerHTML = `
+
                 <div class="loading-box">
-                    <div class="spinner"></div>
-                    <p style="color: var(--muted); font-size: 14px;">Ma'lumotlar qidirilmoqda, iltimos ozgina kuting...</p>
+
+                    Hech narsa topilmadi.
+
                 </div>
+
             `;
 
-            try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=16&q=${encodeURIComponent(query)}&type=video,channel&key=${API_KEY}`);
-                const data = await response.json();
+            return;
 
-                if (data.items && data.items.length > 0) {
-                    const channels = data.items.filter(i => i.id.kind === "youtube#channel");
-                    const videos = data.items.filter(i => i.id.kind === "youtube#video");
+        }
 
-                    const channelIds = [...new Set(videos.map(v => v.snippet.channelId))];
-                    const channelAvatars = await getChannelDetails(channelIds);
 
-                    let html = '';
+        const channels =
+            data.items.filter(
+                item =>
+                    item.id.kind ===
+                    "youtube#channel"
+            );
 
-                    // Topilgan Kanallar
-                    if (channels.length > 0) {
-                        html += `<div class="section-title"><i data-lucide="users" style="color:var(--gold);"></i> Topilgan Kanallar</div><div class="channels-grid">`;
-                        html += channels.map(c => `
-                            <div class="channel-card" onclick="fetchContent('${escapeHtml(c.snippet.channelTitle)}')">
-                                <img class="channel-card-img" src="${c.snippet.thumbnails.high.url}">
-                                <p style="font-weight:700; font-size:13px;">${c.snippet.channelTitle}</p>
+
+        const videos =
+            data.items.filter(
+                item =>
+                    item.id.kind ===
+                    "youtube#video"
+            );
+
+
+        const avatars =
+            await getChannelDetails(
+                [
+                    ...new Set(
+                        videos.map(
+                            video =>
+                                video.snippet.channelId
+                        )
+                    )
+                ]
+            );
+
+
+        let html = "";
+
+
+        /* CHANNELS */
+
+        if(channels.length){
+
+            html += `
+
+                <div class="section-title">
+
+                    <i data-lucide="users"></i>
+
+                    Kanallar
+
+                    <small>
+                        Topilgan kanallar
+                    </small>
+
+                </div>
+
+                <div class="channels-grid">
+
+            `;
+
+
+            html += channels.map(channel => `
+
+                <div
+                    class="channel-card"
+                    onclick="
+                        fetchContent(
+                            '${jsEsc(
+                                channel.snippet.channelTitle
+                            )}'
+                        )
+                    "
+                >
+
+                    <img
+                        class="channel-card-img"
+                        src="${
+                            esc(
+                                channel.snippet
+                                .thumbnails
+                                ?.high?.url
+                                ||
+                                channel.snippet
+                                .thumbnails
+                                ?.default?.url
+                            )
+                        }"
+                    >
+
+
+                    <b style="font-size:13px">
+
+                        ${
+                            esc(
+                                channel.snippet
+                                .channelTitle
+                            )
+                        }
+
+                    </b>
+
+                </div>
+
+            `).join("");
+
+
+            html += `</div>`;
+
+        }
+
+
+        /* VIDEOS */
+
+        if(videos.length){
+
+            html += `
+
+                <div class="section-title">
+
+                    <i data-lucide="clapperboard"></i>
+
+                    Videolar
+
+                    <small>
+                        ${videos.length} ta natija
+                    </small>
+
+                </div>
+
+                <div class="video-grid">
+
+            `;
+
+
+            html += videos.map(video => {
+
+                const id =
+                    video.id.videoId;
+
+                const title =
+                    video.snippet.title;
+
+                const channel =
+                    video.snippet.channelTitle;
+
+                const avatar =
+                    avatars[
+                        video.snippet.channelId
+                    ]
+                    ||
+                    video.snippet
+                    .thumbnails
+                    ?.default?.url
+                    ||
+                    "";
+
+
+                return `
+
+                <article class="video-card">
+
+                    <div
+                        class="thumb-container"
+                        onclick="
+                            openPlayer(
+                                '${jsEsc(id)}',
+                                '${jsEsc(title)}',
+                                '${jsEsc(channel)}'
+                            )
+                        "
+                    >
+
+                        <img
+                            loading="lazy"
+                            src="${
+                                esc(
+                                    video.snippet
+                                    .thumbnails
+                                    ?.high?.url
+                                    ||
+                                    video.snippet
+                                    .thumbnails
+                                    ?.medium?.url
+                                )
+                            }"
+                        >
+
+
+                        <div class="play-overlay">
+
+                            <div class="play-circle">
+
+                                <i
+                                    data-lucide="play"
+                                    style="fill:#fff"
+                                ></i>
+
                             </div>
-                        `).join('');
-                        html += `</div>`;
-                    }
 
-                    // Videolar
-                    if (videos.length > 0) {
-                        html += `<div class="section-title"><i data-lucide="tv" style="color:var(--primary);"></i> Videolar</div><div class="video-grid">`;
-                        html += videos.map(v => {
-                            const avatarUrl = channelAvatars[v.snippet.channelId] || v.snippet.thumbnails.default.url;
-                            return `
-                                <div class="video-card" onclick="openPlayer('${v.id.videoId}', '${escapeHtml(v.snippet.title)}', '${escapeHtml(v.snippet.channelTitle)}')">
-                                    <div class="thumb-container">
-                                        <img src="${v.snippet.thumbnails.high.url}">
-                                    </div>
-                                    <div class="video-info">
-                                        <img class="channel-avatar-img" src="${avatarUrl}" alt="Kanal">
-                                        <div>
-                                            <p style="font-size: 13.5px; font-weight: 600; line-height: 1.35; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${v.snippet.title}</p>
-                                            <p style="color: var(--muted); font-size: 12px;">${v.snippet.channelTitle}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('');
-                        html += `</div>`;
-                    }
+                        </div>
 
-                    targetContainer.innerHTML = html;
-                } else {
-                    targetContainer.innerHTML = `<div style="text-align:center; padding:50px; color:var(--muted);">Hech narsa topilmadi. Qayta urinib ko'ring.</div>`;
-                }
-            } catch (e) {
-                targetContainer.innerHTML = `<div style="text-align:center; padding:50px; color:var(--muted);">Yuklashda xatolik yuz berdi.</div>`;
-            }
-            refreshIcons();
-        }
-
-        function openPlayer(id, title, channel) {
-            document.getElementById('searchResultsContainer').innerHTML = `
-                <div style="display:flex; flex-direction:column; gap:20px;">
-                    <button class="btn-action" style="width:fit-content;" onclick="fetchContent('IT Texnologiyalar')"><i data-lucide="arrow-left"></i> Orqaga</button>
-                    <div class="player-frame">
-                        <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" style="width:100%; height:100%; border:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <h1 style="font-size: 20px;">${title}</h1>
-                    <p style="color: var(--muted);">${channel}</p>
-                </div>
-            `;
-            refreshIcons();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+
+                    <div class="video-info">
+
+                        <img
+                            class="channel-avatar-img"
+                            src="${esc(avatar)}"
+                        >
+
+
+                        <div
+                            style="
+                                min-width:0
+                            "
+                        >
+
+                            <div class="video-title">
+
+                                ${esc(title)}
+
+                            </div>
+
+
+                            <div class="channel-name">
+
+                                ${esc(channel)}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LIKE COMMENT SUBSCRIBE -->
+
+                    <div class="video-actions">
+
+                        <button
+                            class="video-action"
+                            onclick="
+                                likeVideo(
+                                    this,
+                                    '${jsEsc(id)}'
+                                )
+                            "
+                        >
+
+                            <i
+                                data-lucide="thumbs-up"
+                            ></i>
+
+                            Like
+
+                        </button>
+
+
+                        <button
+                            class="video-action"
+                            onclick="
+                                commentVideo(
+                                    '${jsEsc(id)}'
+                                )
+                            "
+                        >
+
+                            <i
+                                data-lucide="message-circle"
+                            ></i>
+
+                            Comment
+
+                        </button>
+
+
+                        <button
+                            class="video-action"
+                            onclick="
+                                subscribeChannel(
+                                    '${jsEsc(
+                                        video.snippet.channelId
+                                    )}'
+                                )
+                            "
+                        >
+
+                            <i
+                                data-lucide="bell"
+                            ></i>
+
+                            Subscribe
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+                `;
+
+            }).join("");
+
+
+            html += `</div>`;
+
         }
 
-        // Tizimga kirish
-        function authenticateUser() {
-            const email = document.getElementById('loginEmail').value;
-            const pass = document.getElementById('loginPass').value;
-            const errorBox = document.getElementById('loginError');
 
-            if (email.includes('@') && pass.length >= 6) {
-                isLoggedIn = true;
-                currentUserEmail = email;
-                document.getElementById('userStatusText').innerText = email.split('@')[0];
-                errorBox.style.display = 'none';
-                closeModal('loginModal');
-                alert("Tizimga xavfsiz kirildi!");
-            } else {
-                errorBox.innerText = "To'g'ri email va kamida 6 belgili parol kiriting!";
-                errorBox.style.display = 'block';
-            }
+        box.innerHTML = html;
+
+
+        refreshIcons();
+
+
+    }catch(error){
+
+        box.innerHTML = `
+
+            <div class="loading-box">
+
+                <p style="color:#ff6682">
+
+                    YouTube maʼlumotlarini
+                    yuklashda xatolik.
+
+                </p>
+
+
+                <small>
+
+                    ${esc(error.message)}
+
+                </small>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+function openPlayer(
+    id,
+    title,
+    channel
+){
+
+    document.getElementById(
+        "searchResultsContainer"
+    ).innerHTML = `
+
+        <div
+            style="
+                display:flex;
+                flex-direction:column;
+                gap:13px
+            "
+        >
+
+            <button
+                class="btn"
+                style="width:max-content"
+                onclick="
+                    fetchContent(
+                        'IT Texnologiyalar Oʻzbekiston'
+                    )
+                "
+            >
+
+                <i data-lucide="arrow-left"></i>
+
+                Orqaga
+
+            </button>
+
+
+            <div class="player-frame">
+
+                <iframe
+                    src="
+                        https://www.youtube.com/embed/${encodeURIComponent(id)}
+                        ?autoplay=1&rel=0
+                    "
+                    allow="
+                        accelerometer;
+                        autoplay;
+                        clipboard-write;
+                        encrypted-media;
+                        gyroscope;
+                        picture-in-picture
+                    "
+                    allowfullscreen
+                ></iframe>
+
+            </div>
+
+
+            <div class="player-actions">
+
+                <button
+                    class="video-action"
+                    onclick="
+                        openYouTube(
+                            '${jsEsc(id)}'
+                        )
+                    "
+                >
+
+                    <i data-lucide="youtube"></i>
+
+                    YouTube'da ochish
+
+                </button>
+
+
+                <button
+                    class="video-action"
+                    onclick="
+                        likeVideo(
+                            this,
+                            '${jsEsc(id)}'
+                        )
+                    "
+                >
+
+                    <i data-lucide="thumbs-up"></i>
+
+                    Like
+
+                </button>
+
+
+                <button
+                    class="video-action"
+                    onclick="
+                        commentVideo(
+                            '${jsEsc(id)}'
+                        )
+                    "
+                >
+
+                    <i data-lucide="message-circle"></i>
+
+                    Comment
+
+                </button>
+
+
+                <button
+                    class="video-action"
+                    onclick="
+                        subscribeChannel('')
+                    "
+                >
+
+                    <i data-lucide="bell"></i>
+
+                    Subscribe
+
+                </button>
+
+            </div>
+
+
+            <div class="player-meta">
+
+                <h1>
+                    ${esc(title)}
+                </h1>
+
+                <p>
+                    ${esc(channel)}
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    refreshIcons();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   YOUTUBE BUTTONS
+========================= */
+
+function openYouTube(id){
+
+    window.open(
+        `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`,
+        "_blank",
+        "noopener"
+    );
+
+}
+
+
+/*
+   Haqiqiy YouTube Like:
+   OAuth 2.0 talab qiladi.
+*/
+
+function likeVideo(btn,id){
+
+    btn.classList.toggle("liked");
+
+
+    if(
+        btn.classList.contains("liked")
+    ){
+
+        btn.innerHTML = `
+
+            <i data-lucide="thumbs-up"></i>
+
+            Liked
+
+        `;
+
+    }else{
+
+        btn.innerHTML = `
+
+            <i data-lucide="thumbs-up"></i>
+
+            Like
+
+        `;
+
+    }
+
+
+    refreshIcons();
+
+}
+
+
+/* COMMENT */
+
+function commentVideo(id){
+
+    window.open(
+        `https://www.youtube.com/watch?v=${encodeURIComponent(id)}#comments`,
+        "_blank",
+        "noopener"
+    );
+
+}
+
+
+/* SUBSCRIBE */
+
+function subscribeChannel(channelId){
+
+    if(channelId){
+
+        window.open(
+            `https://www.youtube.com/channel/${encodeURIComponent(channelId)}?sub_confirmation=1`,
+            "_blank",
+            "noopener"
+        );
+
+    }else{
+
+        alert(
+            "Subscribe tugmasi YouTube kanaliga olib boradi."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchContent(){
+
+    const q =
+        document
+        .getElementById("searchInput")
+        .value
+        .trim();
+
+
+    if(q)
+        fetchContent(q);
+
+}
+
+
+function handleKeyPress(e){
+
+    if(e.key === "Enter")
+        searchContent();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function openLoginModal(){
+
+    document.getElementById(
+        "loginModal"
+    ).style.display="flex";
+
+    refreshIcons();
+
+}
+
+
+function closeModal(id){
+
+    document.getElementById(
+        id
+    ).style.display="none";
+
+}
+
+
+function authenticateUser(){
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+
+    const pass =
+        document
+        .getElementById("loginPass")
+        .value;
+
+
+    const error =
+        document.getElementById(
+            "loginError"
+        );
+
+
+    if(
+        email.includes("@")
+        &&
+        pass.length >= 6
+    ){
+
+        isLoggedIn=true;
+
+        currentUserEmail=email;
+
+
+        document.getElementById(
+            "userStatusText"
+        ).textContent =
+            email.split("@")[0];
+
+
+        error.style.display="none";
+
+
+        closeModal("loginModal");
+
+
+    }else{
+
+        error.textContent =
+            "Toʻgʻri email va kamida 6 belgili parol kiriting.";
+
+        error.style.display="block";
+
+    }
+
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+function handleUploadClick(){
+
+    if(!isLoggedIn){
+
+        alert(
+            "Video qoʻshish uchun avval tizimga kiring."
+        );
+
+        openLoginModal();
+
+    }else{
+
+        alert(
+            "Kontent joylash paneli keyingi bosqichda ulanadi."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   UZREO AI
+========================= */
+
+function toggleAI(force){
+
+    const panel =
+        document.getElementById(
+            "aiPanel"
+        );
+
+
+    if(force === true){
+
+        panel.style.display="flex";
+
+    }
+
+    else if(force === false){
+
+        panel.style.display="none";
+
+    }
+
+    else{
+
+        panel.style.display =
+            panel.style.display === "flex"
+            ?
+            "none"
+            :
+            "flex";
+
+    }
+
+
+    refreshIcons();
+
+}
+
+
+/* AI MESSAGE */
+
+function addMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "aiMessages"
+        );
+
+
+    const message =
+        document.createElement("div");
+
+
+    message.className =
+        "msg " + type;
+
+
+    message.textContent=text;
+
+
+    box.appendChild(message);
+
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+/* AI */
+
+function sendAI(){
+
+    const input =
+        document.getElementById(
+            "aiInput"
+        );
+
+
+    const q =
+        input.value.trim();
+
+
+    if(!q)
+        return;
+
+
+    addMessage(
+        q,
+        "user"
+    );
+
+
+    input.value="";
+
+
+    setTimeout(()=>{
+
+        const l =
+            q.toLowerCase();
+
+
+        let answer;
+
+
+        if(
+            l.includes("salom")
+        ){
+
+            answer =
+                "Salom! Men Uzreo AI. Sizga video qidirish yoki platformadan foydalanishda yordam beraman.";
+
         }
 
-        // Tilak Qo'shish
-        function addWish() {
-            const text = document.getElementById('userWishText').value;
-            if (text.trim() !== '') {
-                const ticker = document.getElementById('tickerText');
-                ticker.innerText = `🇺🇿 ${text} | ` + ticker.innerText;
-                closeModal('wishModal');
-                alert("Rahmat! Tilagingiz tasdiqlandi va efirga uzatildi.");
-            }
+        else if(
+            l.includes("video")
+            ||
+            l.includes("qidir")
+        ){
+
+            answer =
+                "Qidiruvni yuqoridagi qidiruv oynasi orqali boshlashingiz mumkin. Masalan: “Python darslari” yoki “AI news” deb yozing.";
+
         }
 
-        function handleUploadClick() {
-            if (!isLoggedIn) {
-                alert("Video qo'shish uchun avval tizimga kiring!");
-                openLoginModal();
-            } else {
-                alert("Kontent joylash paneli ochildi.");
-            }
+        else if(
+            l.includes("ai")
+        ){
+
+            answer =
+                "AI bo‘yicha videolarni topish uchun qidiruvga mavzuni yozing. Men esa sizga yo‘nalish beraman.";
+
         }
 
-        function searchContent() {
-            const q = document.getElementById('searchInput').value;
-            if (q.trim() !== '') fetchContent(q);
+        else if(
+            l.includes("uzreo")
+        ){
+
+            answer =
+                "Men Uzreo AI — UzrelFlix ichidagi aqlli yordamchiman.";
+
         }
 
-        function handleKeyPress(e) { if (e.key === 'Enter') searchContent(); }
-        function openLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
-        function openWishModal() { document.getElementById('wishModal').style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        function escapeHtml(text) { return text.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+        else{
 
-        // Boshlang'ich Yuklash
-        fetchContent("IT Texnologiyalar O'zbekiston");
-    </script>
+            answer =
+                "Men Uzreo AI demo versiyasiman. Hozircha video qidirish, sayt funksiyalari va umumiy savollarda yordam bera olaman.";
+
+        }
+
+
+        addMessage(
+            answer,
+            "ai"
+        );
+
+
+    },500);
+
+}
+
+
+/* VOICE */
+
+function voiceInput(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition
+        ||
+        window.webkitSpeechRecognition;
+
+
+    if(!SpeechRecognition){
+
+        alert(
+            "Brauzeringiz ovozli kiritishni qoʻllab-quvvatlamaydi."
+        );
+
+        return;
+
+    }
+
+
+    const recognition =
+        new SpeechRecognition();
+
+
+    recognition.lang =
+        "uz-UZ";
+
+
+    recognition.interimResults =
+        false;
+
+
+    recognition.onresult =
+        function(event){
+
+            document.getElementById(
+                "aiInput"
+            ).value =
+                event
+                .results[0][0]
+                .transcript;
+
+
+            sendAI();
+
+        };
+
+
+    recognition.start();
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+refreshIcons();
+
+
+fetchContent(
+    "IT Texnologiyalar Oʻzbekiston"
+);
+
+</script>
+
 </body>
 </html>
+```
